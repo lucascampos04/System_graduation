@@ -2,8 +2,7 @@ from tkinter import Button, Frame, Tk, messagebox, Label, simpledialog, filedial
 import random
 
 
-
-
+from controller.functions import methhod_brand_graduation
 
 '''colors'''
 whitesmoke = "#dcdee8"
@@ -12,22 +11,7 @@ blackLight = "#3d3f47"
 blackButLight = "#585959"
 blue = "#213ac4"
 
-def number_random():
-    number = random.choice(1000, 90000)
 
-
-def create_business():
-    name_business = simpledialog.askstring("Nome da empresa ", "Nome da empresa")
-    cnpj_business = simpledialog.askinteger("CNPJ", "CNPJ")
-    endereco_business = simpledialog.askstring("Endereço ", "Endereço")
-
-def brand_graduation():
-    name_course = simpledialog.askstring("Nome do curso ", "Nome do curso ")
-    name_faculty = simpledialog.askstring("Nome da faculdade", "Nome da faculdade")
-    name_people = simpledialog.askstring("Nome do representante ", "Nome do representante")
-    phone_people = simpledialog.askinteger("Numero do representante ", "Numero do representante ")
-    form_payment = simpledialog.askstring("Forma de pagamento", "Forma de pagamento")
-    value_payment = messagebox.showinfo("Valor a ser pago", number_random)
 
 
 
@@ -52,23 +36,32 @@ framme_footer.grid(row=2, column=0)
 title_frame_top = Label(frame_top, text="Escolha as opções abaixo".upper(), font=("Arial 15 bold"), bg=blue)
 title_frame_top.place(x=90, y=10)
 
+'''LABEL NAME OF BUSiNESS'''
+name_business = Label(frame_midle, text="Empresa de cerimonias", font=("Arial 30 bold"), bg=whiteBg)
+name_business.place(x=20, y=50)
 
 '''BUTTONS'''
-btn_create_business = Button(frame_midle, text="Criar empresa", font=("Ivy 17 bold"), relief='ridge', command=create_business)
-btn_create_business.place(x=20, y=50)
 
-btn_brand_graduation = Button(frame_midle, text="Marca formatura", font=("Ivy 17 bold"), relief='ridge', command=brand_graduation)
-btn_brand_graduation.place(x=20, y=130)
+'''BUTTTTON OF BRAND GRADUATION (EVENT) '''
+brand_graduation = Button(frame_midle, text="Marca formatura", font=("Arial 12 bold"), width=20)
+brand_graduation.place(x=20, y=150)
 
-btn_defer_graduation = Button(frame_midle, text="Adiar formatura", font=("Ivy 17 bold"), relief='ridge')
-btn_defer_graduation.place(x=20, y=210)
+'''BUTTTON OF POSTPONE GRADUATION (EVENT)'''
+postpone_graduation = Button(frame_midle, text="Adiar formatura", font=("Arial 12 bold"), width=20)
+postpone_graduation.place(x=20, y=200)
 
-btn_official = Button(frame_midle, text="Funcionario", font=("Ivy 17 bold"), relief='ridge')
-btn_official.place(x=20, y=290)
+'''INFORMATION BUFFET'S THAT IS WORKING IN EVENT'''
+info_buffets = Button(frame_midle, text="Registrar buffet", font=("Arial 12 bold"), width=20)
+info_buffets.place(x=250, y=150)
+
+'''INFORMATION OF BUSINESS RESPONSIBLE FOR THE GRADUATION (EVENT)'''
+info_business = Button(frame_midle, text="Informações da empresa responsavel pelo evento", relief='flat', bg=whiteBg)
+info_business.place(x=95, y=400)
 
 
-
-
+'''CONTACT'''
+contact_ = Button(framme_footer, text="Suporte", relief='flat', bg=blue, font=("Arial 15 bold"))
+contact_.place(x=370, y=-2)
 
 
 window.mainloop()
