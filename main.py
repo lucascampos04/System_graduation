@@ -3,6 +3,7 @@ import random
 
 
 from controller.functions import methhod_brand_graduation
+from info_business import window_info_business
 
 '''colors'''
 whitesmoke = "#dcdee8"
@@ -11,10 +12,8 @@ blackLight = "#3d3f47"
 blackButLight = "#585959"
 blue = "#213ac4"
 
-
-
-
-
+def open_info_business_window():
+    window_info_business(1)
 
 '''WINDOW WHERE BE OPTIONS OF EVENTS E CREATE BUSINESS'''
 window = Tk()
@@ -55,7 +54,7 @@ info_buffets = Button(frame_midle, text="Registrar buffet", font=("Arial 12 bold
 info_buffets.place(x=250, y=150)
 
 '''INFORMATION OF BUSINESS RESPONSIBLE FOR THE GRADUATION (EVENT)'''
-info_business = Button(frame_midle, text="Informações da empresa responsavel pelo evento", relief='flat', bg=whiteBg)
+info_business = Button(frame_midle, text="Informações da empresa responsavel pelo evento", relief='flat', bg=whiteBg, command=open_info_business_window)
 info_business.place(x=95, y=400)
 
 

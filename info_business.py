@@ -53,5 +53,3 @@ def window_info_business(id):
 
     window.mainloop()
 
-
-window_info_business(1)
