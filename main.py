@@ -2,7 +2,7 @@ from tkinter import Button, Frame, Tk, messagebox, Label, simpledialog, filedial
 import random
 
 
-from controller.functions import methhod_brand_graduation
+from functions import methhod_brand_graduation
 from info_business import window_info_business
 
 '''colors'''
@@ -14,6 +14,9 @@ blue = "#213ac4"
 
 def open_info_business_window():
     window_info_business(1)
+
+def open_brand_graduation_window():
+    methhod_brand_graduation()
 
 '''WINDOW WHERE BE OPTIONS OF EVENTS E CREATE BUSINESS'''
 window = Tk()
@@ -42,7 +45,7 @@ name_business.place(x=20, y=50)
 '''BUTTONS'''
 
 '''BUTTTTON OF BRAND GRADUATION (EVENT) '''
-brand_graduation = Button(frame_midle, text="Marca formatura", font=("Arial 12 bold"), width=20)
+brand_graduation = Button(frame_midle, text="Marca formatura", font=("Arial 12 bold"), width=20, command=open_brand_graduation_window)
 brand_graduation.place(x=20, y=150)
 
 '''BUTTTON OF POSTPONE GRADUATION (EVENT)'''
