@@ -1,5 +1,4 @@
 from database_connect import close_database, connect_database
-import mysql.connector
 
 def inserir_name_school(name_faculdade):
     connection = connect_database()

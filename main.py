@@ -1,9 +1,7 @@
 from tkinter import Button, Frame, Tk, messagebox, Label, simpledialog, filedialog
-import random
 
-
-from functions import methhod_brand_graduation
-from info_business import window_info_business
+from brand_graduation import brand_graduation
+from criar_representante import representante_criar
 
 '''colors'''
 whitesmoke = "#dcdee8"
@@ -12,11 +10,10 @@ blackLight = "#3d3f47"
 blackButLight = "#585959"
 blue = "#213ac4"
 
-def open_info_business_window():
-    window_info_business(1)
+def marca_formatura():
+    representante_criar()
+       
 
-def open_brand_graduation_window():
-    methhod_brand_graduation()
 
 '''WINDOW WHERE BE OPTIONS OF EVENTS E CREATE BUSINESS'''
 window = Tk()
@@ -45,7 +42,7 @@ name_business.place(x=20, y=50)
 '''BUTTONS'''
 
 '''BUTTTTON OF BRAND GRADUATION (EVENT) '''
-brand_graduation = Button(frame_midle, text="Marca formatura", font=("Arial 12 bold"), width=20, command=open_brand_graduation_window)
+brand_graduation = Button(frame_midle, text="Marca formatura", font=("Arial 12 bold"), width=20, command=marca_formatura)
 brand_graduation.place(x=20, y=150)
 
 '''BUTTTON OF POSTPONE GRADUATION (EVENT)'''
@@ -57,7 +54,7 @@ info_buffets = Button(frame_midle, text="Registrar buffet", font=("Arial 12 bold
 info_buffets.place(x=250, y=150)
 
 '''INFORMATION OF BUSINESS RESPONSIBLE FOR THE GRADUATION (EVENT)'''
-info_business = Button(frame_midle, text="Informações da empresa responsavel pelo evento", relief='flat', bg=whiteBg, command=open_info_business_window)
+info_business = Button(frame_midle, text="Informações da empresa responsavel pelo evento", relief='flat', bg=whiteBg,)
 info_business.place(x=95, y=400)
 
 

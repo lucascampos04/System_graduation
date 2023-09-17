@@ -9,7 +9,7 @@ from tkinter import (
     ttk,
     filedialog,)
 
-from insertDataSchoolRepository import (
+from insertDadosSchoolRepository import (
     inserir_name_school,
     inserir_name_curse,
     inserir_select_date,
@@ -19,6 +19,8 @@ from insertDataSchoolRepository import (
 )
 
 from tkcalendar import Calendar
+
+global nome_faculdade, nome_curso, data_selecionada, endereco_selecionado, horas_dispo_selecionada, tipo_evento_selecionado, limite_convidados
 
 
 def inserir_nome_faculdade():
@@ -140,6 +142,27 @@ def tipo_evento(event):
         )
         label_limit_convidado.place(x=520, y=460)
         
+    inserir_tipo_evento(tipo_evento_selecionado, limite_convidados)
+
+def inserir_dados():
+    global nome_faculdade, nome_curso, data_selecionada, endereco_selecionado, horas_dispo_selecionada, tipo_evento_selecionado, limite_convidados
+
+    if (
+        nome_faculdade is None
+        or nome_curso is None
+        or data_selecionada is None
+        or endereco_selecionado is None
+        or horas_dispo_selecionada is None
+        or tipo_evento_selecionado is None
+    ):
+        messagebox.showerror("Error", "Por favor, preencha todos os campos obrigatórios.")
+        return
+    
+    inserir_name_school(nome_faculdade)
+    inserir_name_curse(nome_curso)
+    inserir_select_date(data_selecionada)
+    inserir_endereco(endereco_selecionado)
+    inserir_duracao_prevista(horas_dispo_selecionada)
     inserir_tipo_evento(tipo_evento_selecionado, limite_convidados)
 
 
@@ -325,7 +348,16 @@ def brand_graduation():
     combo_tipo_evento.place(x=520, y=260)
     combo_tipo_evento.bind("<<ComboboxSelected>>", tipo_evento)
 
+    btn_inserir_dados = Button(
+    frame_midle,
+    text="Inserir Dados",
+    command=inserir_dados,
+    font=("Arial", 12),
+    relief='flat',
+    bg="blue",
+    fg="white",
+    )
+    btn_inserir_dados.place(x=20, y=300)
 
     window.mainloop()
 
-brand_graduation()
