@@ -44,17 +44,31 @@ def inserir_select_date(dates_select):
             print(f"Erro ao inserir no banco de dados: {str(err)}")
 
 
-def inserir_endereco(adress):
+def inserir_endereco(adress, ponto_referencia):
     connection = connect_database()
     if connection is not None:
         try:
             cursor = connection.cursor()
-            query = "INSERT INTO marca_evento(enderecos_disponiveis) VALUES(%s)"
-            cursor.execute(query, (adress, ))
+            query = "INSERT INTO marca_evento(enderecos_disponiveis, ponto_de_referencia) VALUES(%s, %s)"
+            cursor.execute(query, (adress, ponto_referencia))
             connection.commit()
             cursor.close()
             connection.close()
-            print("Endereço insirido com sucesso")
+            print("Endereço e Ponto de referencia insirido com sucesso")
+        except Exception as err:
+            print(f"Erro ao inserir no banco de dados: {str(err)}")
+
+def inserir_duracao_prevista(duracao_prevista):
+    connection = connect_database()
+    if connection is not None:
+        try:
+            cursor = connection.cursor()
+            query = "INSERT INTO marca_evento(horarios_disponiveis) VALUES(%s)"
+            cursor.execute(query, (duracao_prevista, ))
+            connection.commit()
+            cursor.close()
+            connection.close()
+            print("Horario insirido com sucesso")
         except Exception as err:
             print(f"Erro ao inserir no banco de dados: {str(err)}")
 
