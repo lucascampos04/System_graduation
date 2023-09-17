@@ -43,3 +43,18 @@ def inserir_select_date(dates_select):
         except Exception as err:
             print(f"Erro ao inserir no banco de dados: {str(err)}")
 
+
+def inserir_endereco(adress):
+    connection = connect_database()
+    if connection is not None:
+        try:
+            cursor = connection.cursor()
+            query = "INSERT INTO marca_evento(enderecos_disponiveis) VALUES(%s)"
+            cursor.execute(query, (adress, ))
+            connection.commit()
+            cursor.close()
+            connection.close()
+            print("Endereço insirido com sucesso")
+        except Exception as err:
+            print(f"Erro ao inserir no banco de dados: {str(err)}")
+
