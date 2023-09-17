@@ -72,3 +72,16 @@ def inserir_duracao_prevista(duracao_prevista):
         except Exception as err:
             print(f"Erro ao inserir no banco de dados: {str(err)}")
 
+def inserir_tipo_evento(tipo_evento, limit_convidado):
+    connection = connect_database()
+    if connection is not None:
+        try:
+            cursor = connection.cursor()
+            query = "INSERT INTO marca_evento(evento_aberto_ou_fechado, limite_de_convidados) VALUES(%s, %s)"
+            cursor.execute(query, (tipo_evento, limit_convidado))
+            connection.commit()
+            cursor.close()
+            connection.close()
+            print("Tipo do Evento e Limite de convidados insiridos com sucesso")
+        except Exception as err:
+            print(f"Erro ao inserir no banco de dados: {str(err)}")

@@ -1,13 +1,25 @@
-from tkinter import messagebox, simpledialog, Tk, Frame, Label, Button, Entry, ttk
-from tkcalendar import Calendar
+from tkinter import (
+    messagebox, 
+    simpledialog, 
+    Tk, 
+    Frame, 
+    Label, 
+    Button, 
+    Entry, 
+    ttk,
+    filedialog,)
 
 from insertDataSchoolRepository import (
     inserir_name_school,
     inserir_name_curse,
     inserir_select_date,
     inserir_endereco,
-    inserir_duracao_prevista
+    inserir_duracao_prevista,
+    inserir_tipo_evento,
 )
+
+from tkcalendar import Calendar
+
 
 def inserir_nome_faculdade():
     nome_faculdade = simpledialog.askstring("Inserir nome", "Digite o nome da Faculdade")
@@ -45,22 +57,6 @@ def selecionar_data(event):
     )
     label_data_selecionada.place(x=170, y=141)
 
-def hours_disponiveis(event):
-    global hours_dispo_selecionada
-    hours_dispo_selecionada = combo_hrs.get()
-    inserir_duracao_prevista(hours_dispo_selecionada)
-
-    combo_hrs.set("")
-    combo_hrs["values"] = [hr for hr in hours if hr != hours_dispo_selecionada]
-
-    label_hrs_selecionada = Label(
-        frame_midle,
-        text=f"Horario selecionado: {hours_dispo_selecionada}",
-        font=("Arial", 11, "bold"),
-        bg="blue",
-        fg="black",
-    )
-    label_hrs_selecionada.place(x=520, y=180)
 
 
 def selecionar_ende(event):
@@ -97,19 +93,70 @@ def selecionar_ende(event):
 
 
 
+def hours_disponiveis(event):
+    global hours_dispo_selecionada
+    hours_dispo_selecionada = combo_hrs.get()
+    inserir_duracao_prevista(hours_dispo_selecionada)
+
+    combo_hrs.set("")
+    combo_hrs["values"] = [hr for hr in hours if hr != hours_dispo_selecionada]
+
+    label_hrs_selecionada = Label(
+        frame_midle,
+        text=f"Horario selecionado: \n{hours_dispo_selecionada}",
+        font=("Arial", 11, "bold"),
+        bg="blue",
+        fg="black",
+    )
+    label_hrs_selecionada.place(x=480, y=170)
+    
+def tipo_evento(event):
+    global tipo_evento_selecionado, label_limit_convidado
+
+    tipo_evento_selecionado = combo_tipo_evento.get()
+    
+
+    combo_tipo_evento.set("")
+    combo_tipo_evento["values"] = [tp_event for tp_event in tipo_event if tp_event != tipo_evento_selecionado]
+
+    # Mensagem falando o tipo do evento
+    label_tip_event_selecionada = Label(
+        frame_midle,
+        text=f"O evento é : {tipo_evento_selecionado}",
+        font=("Arial", 11, "bold"),
+        bg="blue",
+        fg="black",
+    )
+    label_tip_event_selecionada.place(x=530, y=290)
+
+    # se for "FECHADO" vai pedir o limite de convidados
+    if tipo_evento_selecionado == "FECHADO":
+        limite_convidados = simpledialog.askinteger("Limite de Convidados", "Digite o limite de convidados:")
+        label_limit_convidado = Label(
+            text=f"Limite de convidados: {limite_convidados}",
+            font=("Arial", 11, "bold"),
+            bg="blue",
+            fg="white",
+        )
+        label_limit_convidado.place(x=520, y=460)
+        
+    inserir_tipo_evento(tipo_evento_selecionado, limite_convidados)
+
 
 def brand_graduation():
+    global tipo_evento_selecionado, limite_convidados
+    limite_convidados = None
     window = Tk()
     window.title("Marca formatura")
     window.resizable(False, False)
-    window.geometry("800x500")
+    window.geometry("800x550")
 
     '''FRAMES'''
     global frame_midle
     frame_top = Frame(window, width=800, height=150, bg="black")
     frame_top.grid(row=0, column=0)
 
-    frame_midle = Frame(window, width=800, height=350, bg="blue")
+    frame_midle = Frame(window, width=800, height=400, bg="blue")
     frame_midle.grid(row=1, column=0)
 
     title_branda_graduation = Label(
@@ -255,6 +302,28 @@ def brand_graduation():
     combo_hrs = ttk.Combobox(frame_midle, values=hours, width=40)
     combo_hrs.place(x=520, y=140)
     combo_hrs.bind("<<ComboboxSelected>>", hours_disponiveis)
+
+    # selecione se o evento é aberto ou fechado
+    global label_event_tip
+    label_event_tip = Label(
+        frame_midle, 
+        text="Evento aberto ou fechado",
+        font=("Arial", 14, "bold"),
+        bg="blue",
+        fg="white",
+    )
+    label_event_tip.place(x=520, y=220)
+
+
+    global tipo_event
+    tipo_event = [
+        "ABERTO", "FECHADO"
+    ]
+
+    global combo_tipo_evento
+    combo_tipo_evento = ttk.Combobox(frame_midle, values=tipo_event, width=40)
+    combo_tipo_evento.place(x=520, y=260)
+    combo_tipo_evento.bind("<<ComboboxSelected>>", tipo_evento)
 
 
     window.mainloop()
