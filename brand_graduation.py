@@ -7,7 +7,8 @@ from tkinter import (
     Button, 
     Entry, 
     ttk,
-    filedialog,)
+    filedialog,
+)
 
 from insertDadosSchoolRepository import (
     inserir_name_school,
@@ -22,11 +23,27 @@ from tkcalendar import Calendar
 
 global nome_faculdade, nome_curso, data_selecionada, endereco_selecionado, horas_dispo_selecionada, tipo_evento_selecionado, limite_convidados
 
+nome_faculdade = None
+nome_curso = None
+data_selecionada = None
+endereco_selecionado = None
+horas_dispo_selecionada = None
+tipo_evento_selecionado = None
+limite_convidados = None
+
+button_inserir_nome_faculdade = None
+button_inserir_nome_curso = None
+label_data_selecionada = None
+label_ende_selecionada = None
+label_ponto_referencia = None
+label_hrs_selecionada = None
+label_tip_event_selecionada = None
+
 
 def inserir_nome_faculdade():
+    global nome_faculdade
     nome_faculdade = simpledialog.askstring("Inserir nome", "Digite o nome da Faculdade")
     if nome_faculdade:
-        inserir_name_school(nome_faculdade)
         button_inserir_nome_faculdade.config(
             text=nome_faculdade,
             font=("Arial", 15, "bold"),
@@ -36,15 +53,14 @@ def inserir_nome_faculdade():
         )
 
 def inserir_nome_curso():
+    global nome_curso
     nome_curso = simpledialog.askstring("Inserir", "Digite o nome do curso")
     if nome_curso:
-        inserir_name_curse(nome_curso)
         button_inserir_nome_curso.config(text=nome_curso)
 
 def selecionar_data(event):
-    global data_selecionada
+    global data_selecionada, label_data_selecionada
     data_selecionada = combo_date.get()
-    inserir_select_date(data_selecionada)
 
     # remove a data selecionada do combos
     combo_date.set("")
@@ -59,25 +75,22 @@ def selecionar_data(event):
     )
     label_data_selecionada.place(x=170, y=141)
 
-
-
 def selecionar_ende(event):
-    global adress_selecionado
-    adress_selecionado = combo_ende.get()
+    global endereco_selecionado, label_ende_selecionada, label_ponto_referencia
+    endereco_selecionado = combo_ende.get()
 
     # remove o endereço selecionado do combos
     combo_ende.set("")
-    combo_ende["values"] = [addr for addr in adress if addr != adress_selecionado]
+    combo_ende["values"] = [addr for addr in adress if addr != endereco_selecionado]
 
     # encontre o índice do endereço selecionado na lista de endereços
-    index = adress.index(adress_selecionado)
+    index = adress.index(endereco_selecionado)
     ponto_referencia = pontos_referencia[index]
 
-    inserir_endereco(adress_selecionado, ponto_referencia)
     
     label_ende_selecionada = Label(
         frame_midle,
-        text=f"Endereço selecionado: {adress_selecionado}",
+        text=f"Endereço selecionado: {endereco_selecionado}",
         font=("Arial", 11, "bold"),
         bg="blue",
         fg="black",
@@ -93,31 +106,29 @@ def selecionar_ende(event):
     )
     label_ponto_referencia.place(x=20, y=270)
 
-
-
 def hours_disponiveis(event):
-    global hours_dispo_selecionada
-    hours_dispo_selecionada = combo_hrs.get()
-    inserir_duracao_prevista(hours_dispo_selecionada)
+    global horas_dispo_selecionada, label_hrs_selecionada
+    horas_dispo_selecionada = combo_hrs.get()
 
     combo_hrs.set("")
-    combo_hrs["values"] = [hr for hr in hours if hr != hours_dispo_selecionada]
+    combo_hrs["values"] = [hr for hr in hours if hr != horas_dispo_selecionada]
 
     label_hrs_selecionada = Label(
         frame_midle,
-        text=f"Horario selecionado: \n{hours_dispo_selecionada}",
+        text=f"Horario selecionado: \n{horas_dispo_selecionada}",
         font=("Arial", 11, "bold"),
         bg="blue",
         fg="black",
     )
     label_hrs_selecionada.place(x=480, y=170)
-    
+
+
+
 def tipo_evento(event):
-    global tipo_evento_selecionado, label_limit_convidado
+    global tipo_evento_selecionado, limite_convidados, label_tip_event_selecionada
 
     tipo_evento_selecionado = combo_tipo_evento.get()
     
-
     combo_tipo_evento.set("")
     combo_tipo_evento["values"] = [tp_event for tp_event in tipo_event if tp_event != tipo_evento_selecionado]
 
@@ -142,10 +153,9 @@ def tipo_evento(event):
         )
         label_limit_convidado.place(x=520, y=460)
         
-    inserir_tipo_evento(tipo_evento_selecionado, limite_convidados)
 
 def inserir_dados():
-    global nome_faculdade, nome_curso, data_selecionada, endereco_selecionado, horas_dispo_selecionada, tipo_evento_selecionado, limite_convidados
+    global nome_faculdade, nome_curso, data_selecionada, endereco_selecionado, horas_dispo_selecionada, tipo_evento_selecionado, limite_convidados, pontos_referencia
 
     if (
         nome_faculdade is None
@@ -154,6 +164,7 @@ def inserir_dados():
         or endereco_selecionado is None
         or horas_dispo_selecionada is None
         or tipo_evento_selecionado is None
+        or pontos_referencia is None
     ):
         messagebox.showerror("Error", "Por favor, preencha todos os campos obrigatórios.")
         return
@@ -161,10 +172,12 @@ def inserir_dados():
     inserir_name_school(nome_faculdade)
     inserir_name_curse(nome_curso)
     inserir_select_date(data_selecionada)
-    inserir_endereco(endereco_selecionado)
+    inserir_endereco(endereco_selecionado, pontos_referencia)
     inserir_duracao_prevista(horas_dispo_selecionada)
     inserir_tipo_evento(tipo_evento_selecionado, limite_convidados)
 
+    if nome_faculdade and nome_curso and data_selecionada and endereco_selecionado and horas_dispo_selecionada and tipo_evento_selecionado and limite_convidados and pontos_referencia:
+        messagebox.showinfo("Sucesso", "Fomatura marcada com sucesso")
 
 def brand_graduation():
     global tipo_evento_selecionado, limite_convidados
@@ -361,3 +374,4 @@ def brand_graduation():
 
     window.mainloop()
 
+brand_graduation()
