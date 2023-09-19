@@ -1,3 +1,13 @@
+CREATE TABLE cadastrar_buffet(
+	id integer primary key auto_increment,
+    nome varchar(200) not null,
+    cnpj int not null,
+    endereco varchar(300) not null,
+    tempo_de_parceria varchar(200) not null,
+    tipo_de_parceria varchar(30) not null,
+    email varchar(400) not null
+);
+
 CREATE TABLE eventos_privados(
 	id INT PRIMARY KEY AUTO_INCREMENT,
     id_do_curso INT,
@@ -35,3 +45,11 @@ CREATE TABLE `dados_empresa` (
   `telefone` varchar(30) NOT NULL,
   PRIMARY KEY (`id_empresa`)
 );
+
+
+select * from representante_de_classe;
+select * from marca_evento;
+select * from eventos_privados;
+drop table representante_de_classe;
+drop table marca_evento;
+drop table eventos_privados;
