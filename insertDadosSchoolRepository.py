@@ -13,7 +13,7 @@ def inserir_name_school(name_faculdade):
             connection.close()
             print("Nome da faculdade inserio com sucesso")
         except Exception as err:
-             print(f"Erro ao inserir no banco de dados: {str(err)}")
+            print(f"Erro ao inserir no banco de dados: {str(err)}")
 
 def inserir_name_curse(name_curso):
     connection = connect_database()

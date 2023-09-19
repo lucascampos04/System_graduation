@@ -80,7 +80,7 @@ def buffet():
     box_tipo_parceria.bind("<<ComboboxSelected>>")
 
     # Email
-    email_buffet = Label(frame_middle, text="Nome : ", font=("Arial 13 bold"), bg="white")
+    email_buffet = Label(frame_middle, text="Email : ", font=("Arial 13 bold"), bg="white")
     email_buffet.place(x=10, y=220)
     entry_email_buffet = Entry(frame_middle)
     entry_email_buffet.place(x=80, y=225)
