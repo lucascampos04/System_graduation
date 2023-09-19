@@ -1,4 +1,4 @@
-from database_connect import close_database, connect_database
+from model.database_connect import close_database, connect_database
 
 # nome de representante
 def inserir_name_representante(name_representante):
@@ -60,4 +60,6 @@ def inserir_email_representante(email):
             print("Email inserido com sucesso")
         except Exception as err:
              print(f"Erro ao inserir no banco de dados: {str(err)}")
+
+
             

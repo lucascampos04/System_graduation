@@ -1,4 +1,4 @@
-from database_connect import close_database, connect_database
+from model.database_connect import close_database, connect_database
 
 def inserir_name_school(name_faculdade):
     connection = connect_database()
@@ -71,16 +71,45 @@ def inserir_duracao_prevista(duracao_prevista):
         except Exception as err:
             print(f"Erro ao inserir no banco de dados: {str(err)}")
 
-def inserir_tipo_evento(tipo_evento, limit_convidado):
+def inserir_tipo_evento(tipo_evento, limit_convidado, id_do_representante):
     connection = connect_database()
     if connection is not None:
         try:
             cursor = connection.cursor()
-            query = "INSERT INTO marca_evento(evento_aberto_ou_fechado, limite_de_convidados) VALUES(%s, %s)"
-            cursor.execute(query, (tipo_evento, limit_convidado))
+
+            # Insira na tabela marca_evento
+            query_marca_evento = "INSERT INTO marca_evento(evento_aberto_ou_fechado, limite_de_convidados) VALUES(%s, %s)"
+            cursor.execute(query_marca_evento, (tipo_evento, limit_convidado))
             connection.commit()
+
+            # Obtenha o ID do último registro inserido em marca_evento
+            id_marca_evento = cursor.lastrowid
+
+            # Insira na tabela eventos_privados com as chaves estrangeiras
+            query_eventos_privados = "INSERT INTO eventos_privados(id_do_curso, id_do_representante) VALUES(%s, %s)"
+            cursor.execute(query_eventos_privados, (id_marca_evento, id_do_representante))
+            connection.commit()
+
             cursor.close()
             connection.close()
-            print("Tipo do Evento e Limite de convidados insiridos com sucesso")
+            print("Tipo do Evento e Limite de convidados inseridos com sucesso")
         except Exception as err:
             print(f"Erro ao inserir no banco de dados: {str(err)}")
+
+def inserir_representante(nome, telefone, forma_pagamento, email):
+    connection = connect_database()
+    if connection is not None:
+        try:
+            cursor = connection.cursor()
+            query = "INSERT INTO representante_de_classe(nome, telefone, forma_pagamento, email) VALUES (%s, %s, %s, %s)"
+            cursor.execute(query, (nome, telefone, forma_pagamento, email))
+            connection.commit()
+            id_do_representante = cursor.lastrowid  # Obtém o ID do representante inserido
+            cursor.close()
+            connection.close()
+            return id_do_representante
+        except Exception as err:
+            print(f"Erro ao inserir no banco de dados: {str(err)}")
+            return None
+
+

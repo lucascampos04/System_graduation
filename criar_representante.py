@@ -1,6 +1,6 @@
 from tkinter import Button, Frame, Tk, Label, simpledialog, ttk, messagebox
-from database_connect import connect_database
-from inseririDadosRepresentante import inserir_name_representante, inserir_telefone_representante, inserir_forma_de_pagamento_representante, inserir_email_representante
+from model.database_connect import connect_database
+from Repository.inseririDadosRepresentante import inserir_name_representante, inserir_telefone_representante, inserir_forma_de_pagamento_representante, inserir_email_representante
 from brand_graduation import brand_graduation
 
 # Declaração das variáveis globais
@@ -112,5 +112,3 @@ def representante_criar():
     btn_registrar.place(x=140, y=200)
 
     window.mainloop()
-
-representante_criar()

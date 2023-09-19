@@ -1,4 +1,4 @@
-from database_connect import close_database, connect_database
+from model.database_connect import close_database, connect_database
 import mysql.connector
 
 

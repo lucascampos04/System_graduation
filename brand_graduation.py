@@ -10,14 +10,17 @@ from tkinter import (
     filedialog,
 )
 
-from insertDadosSchoolRepository import (
+from Repository.insertDadosSchoolRepository import (
     inserir_name_school,
     inserir_name_curse,
     inserir_select_date,
     inserir_endereco,
     inserir_duracao_prevista,
     inserir_tipo_evento,
+    inserir_representante
 )
+
+from criar_representante import name_saved, telefone_saved, frm_pag_escolhida, email_saved
 
 from tkcalendar import Calendar
 
@@ -38,6 +41,11 @@ label_ende_selecionada = None
 label_ponto_referencia = None
 label_hrs_selecionada = None
 label_tip_event_selecionada = None
+
+name_saved = None
+telefone_saved = None
+frm_pag_escolhida = None
+email_saved = None
 
 
 def inserir_nome_faculdade():
@@ -155,8 +163,16 @@ def tipo_evento(event):
         
 
 def inserir_dados():
-    global nome_faculdade, nome_curso, data_selecionada, endereco_selecionado, horas_dispo_selecionada, tipo_evento_selecionado, limite_convidados, pontos_referencia
-
+    global nome_faculdade, \
+    nome_curso, \
+    data_selecionada, \
+    endereco_selecionado, \
+    horas_dispo_selecionada, \
+    tipo_evento_selecionado, \
+    limite_convidados, \
+    pontos_referencia ,\
+    name_saved, telefone_saved, frm_pag_escolhida, email_saved
+    
     if (
         nome_faculdade is None
         or nome_curso is None
@@ -168,16 +184,23 @@ def inserir_dados():
     ):
         messagebox.showerror("Error", "Por favor, preencha todos os campos obrigatórios.")
         return
-    
-    inserir_name_school(nome_faculdade)
-    inserir_name_curse(nome_curso)
-    inserir_select_date(data_selecionada)
-    inserir_endereco(endereco_selecionado, pontos_referencia)
-    inserir_duracao_prevista(horas_dispo_selecionada)
-    inserir_tipo_evento(tipo_evento_selecionado, limite_convidados)
 
-    if nome_faculdade and nome_curso and data_selecionada and endereco_selecionado and horas_dispo_selecionada and tipo_evento_selecionado and limite_convidados and pontos_referencia:
-        messagebox.showinfo("Sucesso", "Fomatura marcada com sucesso")
+    # Insira os dados do representante
+    id_do_representante = inserir_representante(name_saved, telefone_saved, frm_pag_escolhida, email_saved)
+
+    # Verifique se o ID do representante foi obtido com sucesso
+    if id_do_representante is not None:
+        inserir_name_school(nome_faculdade)
+        inserir_name_curse(nome_curso)
+        inserir_select_date(data_selecionada)
+        inserir_endereco(endereco_selecionado, pontos_referencia)
+        inserir_duracao_prevista(horas_dispo_selecionada)
+        inserir_tipo_evento(tipo_evento_selecionado, limite_convidados, id_do_representante)
+
+        if nome_faculdade and nome_curso and data_selecionada and endereco_selecionado and horas_dispo_selecionada and tipo_evento_selecionado and limite_convidados and pontos_referencia:
+            messagebox.showinfo("Sucesso", "Formatura marcada com sucesso")
+    else:
+        print("Erro ao inserir representante de classe.")
 
 def brand_graduation():
     global tipo_evento_selecionado, limite_convidados
@@ -373,5 +396,3 @@ def brand_graduation():
     btn_inserir_dados.place(x=20, y=300)
 
     window.mainloop()
-
-brand_graduation()
