@@ -1,73 +1,36 @@
-from tkinter import Button, Frame, Tk, Label
+from tkinter import Tk, Label, Button
+from Components.Frames import frame_top, frame_meio, frame_final
+from View.marca_formatura import marca_graduation
 
-from criar_representante import representante_criar
-from register_buffet import buffet
+def marca():
+    print("Foi")
 
+def open_window_marca_formatura():
+    marca_graduation()
 
-'''colors'''
-whitesmoke = "#dcdee8"
-whiteBg = "#e6e7eb"
-blackLight = "#3d3f47"
-blackButLight = "#585959"
-blue = "#213ac4"
-
-def marca_formatura():
-    representante_criar()
-       
-def register_buffet():
-    buffet()
-
-
-'''WINDOW WHERE BE OPTIONS OF EVENTS E CREATE BUSINESS'''
 window = Tk()
-window.geometry("500x500")
-window.resizable(False, False)
-window.title("Tela principal")
+window.title("Tela inicial")
+window.geometry("500x600")
 
-'''FRAMES'''
-frame_top = Frame(window, width=500, height=50, bg=blue)
-frame_top.grid(row=0, column=0)
+ # Frames
 
-frame_midle = Frame(window, width=500, height=420, bg=whiteBg)
-frame_midle.grid(row=1, column=0)
+frameT = frame_top(window, 500, 150, 'black')
+frameT.grid(row = 0, column = 0)
 
-framme_footer = Frame(window, width=500, height=35, bg=blue)
-framme_footer.grid(row=2, column=0)
+frameM = frame_meio(window, 500, 400, 'red')
+frameM.grid(row = 1, column = 0)
 
-'''LABELS'''
-title_frame_top = Label(frame_top, text="Escolha as opções abaixo".upper(), font=("Arial 15 bold"), bg=blue)
-title_frame_top.place(x=90, y=10)
+frameF = frame_final(window, 500, 50, 'white')
+frameF.grid(row = 2, column = 0)
 
-'''LABEL NAME OF BUSiNESS'''
-name_business = Label(frame_midle, text="Empresa de cerimonias", font=("Arial 30 bold"), bg=whiteBg)
-name_business.place(x=20, y=50)
+# Labes e Buttons
 
-'''BUTTONS'''
+# frame top
+title_frame_top = Label(frameT, text="Empresa de Cerimonias", font=("Arial 30 bold"), bg='black', fg='white')
+title_frame_top.place(x=30, y=50)
 
-'''BUTTTTON OF BRAND GRADUATION (EVENT) '''
-brand_graduation = Button(frame_midle, text="Marca formatura", font=("Arial 12 bold"), width=20, command=marca_formatura)
-brand_graduation.place(x=20, y=150)
-
-'''BUTTTON OF POSTPONE GRADUATION (EVENT)'''
-postpone_graduation = Button(frame_midle, text="Adiar formatura", font=("Arial 12 bold"), width=20)
-postpone_graduation.place(x=20, y=200)
-
-'''INFORMATION BUFFET'S THAT IS WORKING IN EVENT'''
-info_buffets = Button(frame_midle, text="Registrar buffet", font=("Arial 12 bold"), width=20)
-info_buffets.place(x=250, y=150)
-
-'''PROVIDE YOU WORK'''
-provid_work = Button(frame_midle, text="Estamos contratando", font=("Arial 12 bold"), width=20, command=register_buffet)
-provid_work.place(x=250, y=200)
-
-'''INFORMATION OF BUSINESS RESPONSIBLE FOR THE GRADUATION (EVENT)'''
-info_business = Button(frame_midle, text="Informações da empresa responsavel pelo evento", relief='flat', bg=whiteBg,)
-info_business.place(x=95, y=400)
-
-
-'''CONTACT'''
-contact_ = Button(framme_footer, text="Suporte", relief='flat', bg=blue, font=("Arial 15 bold"))
-contact_.place(x=370, y=-2)
-
+# frame meio
+btn_marca_formatura = Button(frameM,text="Marca Formatura", bg='white', fg='black', font=("Arial 20 bold"), command=open_window_marca_formatura)
+btn_marca_formatura.place(x=10, y=80)
 
 window.mainloop()
