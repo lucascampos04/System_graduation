@@ -2,7 +2,7 @@ from tkinter import Button, Frame, Tk, messagebox, Label, simpledialog, filedial
 import mysql.connector
 import webbrowser
 
-from infoBusinessRepository import get_name, get_email, get_phone, get_ende
+from insertinfoBusinessRepository import get_name, get_email, get_phone, get_ende
 
 '''colors'''
 whitesmoke = "#dcdee8"

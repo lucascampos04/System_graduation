@@ -1,5 +1,6 @@
 from database_connect import close_database, connect_database
 
+
 def inserir_name_school(name_faculdade):
     connection = connect_database()
     if connection is not None:
