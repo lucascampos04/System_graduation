@@ -8,7 +8,7 @@ from tkinter import (
     Button, 
     Entry, 
     ttk)
-from brand_graduation import label_limit_convidado
+
 
 
 

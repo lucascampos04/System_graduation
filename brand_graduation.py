@@ -4,13 +4,11 @@ from tkinter import (
     Tk, 
     Frame, 
     Label, 
-    Button, 
-    Entry, 
+    Button,
     ttk,
-    filedialog,
 )
 
-from Repository.insertDadosSchoolRepository import (
+from insertDadosSchoolRepository import (
     inserir_name_school,
     inserir_name_curse,
     inserir_select_date,
@@ -19,10 +17,6 @@ from Repository.insertDadosSchoolRepository import (
     inserir_tipo_evento,
     inserir_representante
 )
-
-from criar_representante import name_saved, telefone_saved, frm_pag_escolhida, email_saved
-
-from tkcalendar import Calendar
 
 global nome_faculdade, nome_curso, data_selecionada, endereco_selecionado, horas_dispo_selecionada, tipo_evento_selecionado, limite_convidados
 

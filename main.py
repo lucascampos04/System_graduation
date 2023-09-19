@@ -1,7 +1,8 @@
-from tkinter import Button, Frame, Tk, messagebox, Label, simpledialog, filedialog
+from tkinter import Button, Frame, Tk, Label
 
-from brand_graduation import brand_graduation
 from criar_representante import representante_criar
+from register_buffet import buffet
+
 
 '''colors'''
 whitesmoke = "#dcdee8"
@@ -13,6 +14,8 @@ blue = "#213ac4"
 def marca_formatura():
     representante_criar()
        
+def register_buffet():
+    buffet()
 
 
 '''WINDOW WHERE BE OPTIONS OF EVENTS E CREATE BUSINESS'''
@@ -52,6 +55,10 @@ postpone_graduation.place(x=20, y=200)
 '''INFORMATION BUFFET'S THAT IS WORKING IN EVENT'''
 info_buffets = Button(frame_midle, text="Registrar buffet", font=("Arial 12 bold"), width=20)
 info_buffets.place(x=250, y=150)
+
+'''PROVIDE YOU WORK'''
+provid_work = Button(frame_midle, text="Estamos contratando", font=("Arial 12 bold"), width=20, command=register_buffet)
+provid_work.place(x=250, y=200)
 
 '''INFORMATION OF BUSINESS RESPONSIBLE FOR THE GRADUATION (EVENT)'''
 info_business = Button(frame_midle, text="Informações da empresa responsavel pelo evento", relief='flat', bg=whiteBg,)

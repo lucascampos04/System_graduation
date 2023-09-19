@@ -1,4 +1,4 @@
-from model.database_connect import close_database, connect_database
+from database_connect import close_database, connect_database
 
 # nome de representante
 def inserir_name_representante(name_representante):
