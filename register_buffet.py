@@ -1,12 +1,24 @@
 from tkinter import Button, Frame, Tk, Label, Entry, ttk
+from insertBuffet import insert_name_buffet, insert_cnpj_buffet
 
+getNameEntry = None
+getCnpjEntry = None
 
-# def getTeste():
-#     valor = [entry_name_buffet.get(), entry_cnpj_buffet.get(), entry_cnpj_buffet.get()]
-#     print(valor[1])
+def setNameBuffet():
+    global getNameEntry
+    getNameEntry = entry_name_buffet.get()
+
+def setCnpjBuffet():
+    global getCnpjEntry
+    getCnpjEntry = entry_cnpj_buffet.get()
+
+def registrar():
+    global getNameEntry, getCnpjEntry
+    insert_name_buffet(getNameEntry)
+    insert_cnpj_buffet(getCnpjEntry)
 
 def buffet():
-    global entry_name_buffet, entry_cnpj_buffet, entry_email_buffet
+    global entry_name_buffet, entry_cnpj_buffet, entry_email_buffet, getNameEntry, getCnpjEntry
     window_register_buffet = Tk()
     window_register_buffet.title("Buffet")
     window_register_buffet.resizable(False, False)
@@ -74,7 +86,7 @@ def buffet():
     entry_email_buffet.place(x=80, y=225)
 
 
-    button_cadastrar = Button(text="Cadastrar", font=("Arial 16 bold"))
+    button_cadastrar = Button(text="Cadastrar", font=("Arial 16 bold"), command=registrar)
     button_cadastrar.place(x=150, y=430)
 
 
