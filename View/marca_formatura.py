@@ -1,11 +1,12 @@
 from tkinter import Tk, Label, Button, Entry, ttk, Radiobutton, StringVar
 from Components.Frames import (frame_meio, frame_final, frame_top)
-from Model.Query.InsertFormatura import (insertNameFaculdade,
+from Model.Query.tablesassoiacao import (insertNameFaculdade,
                                          insertNameCurso,
                                          insertNameEvento,
                                          insertNameStatus,
                                          insertNameForma,
                                          )
+from Model.Query.tableFormatura import insertFormatura
 
 
 
@@ -40,6 +41,12 @@ def getTipoEvento():
     tipoevento = var.get()
     return tipoevento
 
+'''
+    def getTotal():
+    global total
+    total = label_total.get()
+    return total
+'''
 
 def insert():
     global label_total, new_label
@@ -50,10 +57,14 @@ def insert():
     tipoevento = getTipoEvento()
     limitepessoas = getLimitePessoas()
 
-    insertNameFaculdade(faculdade)
-    insertNameCurso(curso)
-    insertNameForma(formapagamento)
-    insertNameEvento(tipoevento)
+    id_faculdade = insertNameFaculdade(faculdade)
+    id_curso = insertNameCurso(curso)
+    id_formPagamento = insertNameForma(formapagamento)
+    id_tipoEvento = insertNameEvento(tipoevento)
+
+    total = 1000
+
+    insertFormatura(id_faculdade, id_curso, representante, id_formPagamento, total, id_tipoEvento, limitepessoas)
 def marca_graduation():
     global input_faculdade, input_curso, input_representante, input_limite_pessoas, formas_pagamentos,var, label_total
 
