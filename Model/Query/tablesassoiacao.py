@@ -10,9 +10,11 @@ def insertNameFaculdade(faculdade):
             query = "INSERT INTO FACULDADE(nome) values (%s)"
             cursor.execute(query, (faculdade,))
             conn.commit()
+            faculdade_id = cursor.lastrowid
             cursor.close()
             conn.close()
             print("Insert com sucesso")
+            return faculdade_id
         except Exception as err:
             print(f"Erro ao inserir no banco de dados: {str(err)}")
 
@@ -28,9 +30,11 @@ def insertNameCurso(curso):
             query = "INSERT INTO CURSO(curso) values (%s)"
             cursor.execute(query, (curso,))
             conn.commit()
+            curso_id = cursor.lastrowid
             cursor.close()
             conn.close()
             print("Insert com sucesso")
+            return curso_id
         except Exception as err:
             print(f"Erro ao inserir no banco de dados: {str(err)}")
 
@@ -45,9 +49,11 @@ def insertNameEvento(evento):
             query = "INSERT INTO EVENTO(evento) values (%s)"
             cursor.execute(query, (evento,))
             conn.commit()
+            evento_id = cursor.lastrowid
             cursor.close()
             conn.close()
             print("Insert com sucesso")
+            return evento_id
         except Exception as err:
             print(f"Erro ao inserir no banco de dados: {str(err)}")
 
@@ -63,9 +69,11 @@ def insertNameStatus(status):
             query = "INSERT INTO STATUS (status) values (%s)"
             cursor.execute(query, (status,))
             conn.commit()
+            status_id = cursor.lastrowid
             cursor.close()
             conn.close()
             print("Insert com sucesso")
+            return status_id
         except Exception as err:
             print(f"Erro ao inserir no banco de dados: {str(err)}")
 
@@ -81,12 +89,13 @@ def insertNameForma(forma):
             query = "INSERT INTO FORM_PAGMENTO (forma) values (%s)"
             cursor.execute(query, (forma,))
             conn.commit()
+            forma_id = cursor.lastrowid
             cursor.close()
             conn.close()
             print("Insert com sucesso")
+            return forma_id
         except Exception as err:
             print(f"Erro ao inserir no banco de dados: {str(err)}")
 
-# ----------------------------------------------------------------------------------- #
 
-# insert tabela formatura
+
