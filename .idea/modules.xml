@@ -2,7 +2,11 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+<<<<<<< refatorando
+      <module fileurl="file://$PROJECT_DIR$/.idea/Cerimonias.iml" filepath="$PROJECT_DIR$/.idea/Cerimonias.iml" />
+=======
       <module fileurl="file://$PROJECT_DIR$/.idea/System_graduation.iml" filepath="$PROJECT_DIR$/.idea/System_graduation.iml" />
+>>>>>>> master
     </modules>
   </component>
 </project>
