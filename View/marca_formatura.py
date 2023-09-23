@@ -183,5 +183,3 @@ def marca_graduation():
     btn_registrar.place(x=30, y=350)
 
     window.mainloop()
-
-marca_graduation()
