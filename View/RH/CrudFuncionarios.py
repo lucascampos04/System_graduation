@@ -1,5 +1,10 @@
 from tkinter import Tk, Label, Button, Entry, messagebox, ttk
 from Components.Frames import *
+from contratar_funcionario import windowFuncionarioADD
+
+def window_contratar_funcionario():
+    windowFuncionarioADD()
+
 def CrudFuncionarios():
     window = Tk()
     window.title("Funcionarios");
@@ -12,7 +17,7 @@ def CrudFuncionarios():
     frameM.grid(row=1, column=0)
 
     # Labels/Buttons
-    btn_cre = Button(frameT, text="Contratar funcionario", font=("Arial 15 bold"), bg='white', fg='black', relief='flat')
+    btn_cre = Button(frameT, text="Contratar funcionario", font=("Arial 15 bold"), bg='white', fg='black', relief='flat', command=window_contratar_funcionario)
     btn_cre.place(x=30, y=30)
 
     btn_rmv = Button(frameT, text="Demitir funcionario", font=("Arial 15 bold"), bg='white', fg='black',relief='flat')
