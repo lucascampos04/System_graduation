@@ -6,7 +6,7 @@ def connect_database():
             host="localhost",
             user="root",
             password="senha123456",
-            database="cerimonias"
+            database="systemgraduation"
         )
         return connection
     except mysql.connector.Error as err:
