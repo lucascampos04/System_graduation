@@ -1,16 +1,34 @@
 from tkinter import Tk, Label, Button, Entry, messagebox, ttk
 from Model.database import connect_database, close_database
 from Components.Frames import *
+from Model.Query.funcionariosCrud import contratar_funcionarios
 
-global entry_nome, entry_telefone, options_funcao, funcao, label_salario_trocar, select_funcao, label_salario, label_cargo, label_nome, label_telefone
+global entry_nome, \
+    entry_telefone, \
+    options_funcao, \
+    funcao, \
+    label_salario_trocar, \
+    select_funcao, \
+    label_salario, \
+    label_cargo, \
+    label_nome, \
+    label_telefone, \
+    select_name,\
+    select_telefone, \
+    label_nome, \
+    entry_telefone, \
+    label_telefone, \
+    salario
 
 def on_funcao_selected(event):
     global funcao, select_funcao, label_cargo
+
     select_funcao = options_funcao.get()
     if select_funcao and select_funcao in funcao[:7]:
         label_salario_trocar.config(text="5.000,00")
         label_salario.config(text="5.000,00")
         label_cargo.config(text=select_funcao)
+
     elif select_funcao and select_funcao in funcao[8:]:
         label_salario_trocar.config(text="2.000,00")
         label_salario.config(text="2.000,00")
@@ -19,11 +37,27 @@ def on_funcao_selected(event):
         label_salario_trocar.config(text="XXXXX")
 
 def troca_dados():
-    global select_name,select_telefone, label_nome, entry_telefone, label_telefone
+    global select_name,select_telefone, label_nome, entry_telefone, label_telefone, select_funcao
     select_name = entry_nome.get()
     select_telefone = entry_telefone.get()
     label_nome.config(text=select_name)
     label_telefone.config(text=select_telefone)
+    select_funcao = options_funcao.get()
+    salario = 0;
+
+    if select_funcao and select_funcao in funcao[:7]:
+        salario = 5000
+        contratar_funcionarios(select_name, select_telefone, select_funcao, salario)
+    elif select_funcao and select_funcao in funcao[8:]:
+        salario = 2000
+        contratar_funcionarios(select_name, select_telefone, select_funcao, salario)
+
+
+
+
+
+
+
 
 def windowFuncionarioADD():
     global entry_nome,\
