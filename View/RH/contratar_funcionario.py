@@ -18,7 +18,8 @@ global entry_nome, \
     label_nome, \
     entry_telefone, \
     label_telefone, \
-    salario
+    salario, \
+    label_matricula
 
 def on_funcao_selected(event):
     global funcao, select_funcao, label_cargo
@@ -37,7 +38,10 @@ def on_funcao_selected(event):
         label_salario_trocar.config(text="XXXXX")
 
 def troca_dados():
-    global select_name,select_telefone, label_nome, entry_telefone, label_telefone, select_funcao
+    global select_name,select_telefone, label_nome, entry_telefone, label_telefone, select_funcao, label_matricula
+
+
+
     select_name = entry_nome.get()
     select_telefone = entry_telefone.get()
     label_nome.config(text=select_name)
@@ -47,17 +51,12 @@ def troca_dados():
 
     if select_funcao and select_funcao in funcao[:7]:
         salario = 5000
-        contratar_funcionarios(select_name, select_telefone, select_funcao, salario)
+        funcionario_id = contratar_funcionarios(select_name, select_telefone, select_funcao, salario)
+        label_matricula.config(text=funcionario_id)
     elif select_funcao and select_funcao in funcao[8:]:
         salario = 2000
-        contratar_funcionarios(select_name, select_telefone, select_funcao, salario)
-
-
-
-
-
-
-
+        funcionario_id = contratar_funcionarios(select_name, select_telefone, select_funcao, salario)
+        label_matricula.config(text=funcionario_id)
 
 def windowFuncionarioADD():
     global entry_nome,\
@@ -68,7 +67,8 @@ def windowFuncionarioADD():
         label_salario,\
         label_cargo,\
         label_nome,\
-        label_telefone
+        label_telefone, \
+        label_matricula
 
     window = Tk()
     window.title("Contratar funcionario")

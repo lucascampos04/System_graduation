@@ -1,5 +1,4 @@
 from Model.database import connect_database
-
 def contratar_funcionarios(nome, telefone, cargo, salario):
     conn = connect_database()
     if conn is not None:
