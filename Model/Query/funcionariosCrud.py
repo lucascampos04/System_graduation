@@ -14,3 +14,17 @@ def contratar_funcionarios(nome, telefone, cargo, salario):
             return contratar_funcionario_id
         except Exception as err:
             print(f"Erro ao inserir no banco de dados: {str(err)}")
+
+def demitir_funcionario(matricula):
+    conn = connect_database()
+    if conn is not None:
+        try:
+            cursor = conn.cursor()
+            query = "DELETE FROM CONTRATAR_FUNCIONARIO WHERE matricula = %s"
+            cursor.execute(query, (matricula, ))
+            conn.commit()
+            cursor.close()
+            conn.close()
+            print("Demissão realizada com sucesso")
+        except Exception as err:
+            print(f"Erro ao inserir no banco de dados: {str(err)}")

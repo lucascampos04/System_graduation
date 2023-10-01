@@ -40,8 +40,6 @@ def on_funcao_selected(event):
 def troca_dados():
     global select_name,select_telefone, label_nome, entry_telefone, label_telefone, select_funcao, label_matricula
 
-
-
     select_name = entry_nome.get()
     select_telefone = entry_telefone.get()
     label_nome.config(text=select_name)
@@ -53,10 +51,12 @@ def troca_dados():
         salario = 5000
         funcionario_id = contratar_funcionarios(select_name, select_telefone, select_funcao, salario)
         label_matricula.config(text=funcionario_id)
+        messagebox.showinfo("Sucesso", "Funcionario contratado com sucesso")
     elif select_funcao and select_funcao in funcao[8:]:
         salario = 2000
         funcionario_id = contratar_funcionarios(select_name, select_telefone, select_funcao, salario)
         label_matricula.config(text=funcionario_id)
+        messagebox.showinfo("Sucesso", "Funcionario contratado com sucesso")
 
 def windowFuncionarioADD():
     global entry_nome,\
@@ -161,5 +161,3 @@ def windowFuncionarioADD():
 
 
     window.mainloop()
-
-windowFuncionarioADD()
