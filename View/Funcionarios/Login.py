@@ -2,6 +2,7 @@ from tkinter import Tk, Label, Button, Entry, messagebox
 from Components.Frames import *
 from Model.Query.tableFuncionarios import verificar_login
 global id_input, senha_input
+from View.RH.contratar_funcionario import windowFuncionarioADD
 def getUser(id_input):
     return id_input.get()
 def getSenha(senha_input):
@@ -9,10 +10,15 @@ def getSenha(senha_input):
 def entrar():
     user = getUser(id_input)
     senha = getSenha(senha_input)
+    if user == "admin" and senha == "admin":
+        windowFuncionarioADD()
+        return True
+
     if verificar_login(user, senha):
         messagebox.showinfo("Login feito com sucesso", "Login realizado com sucesso")
     else:
         messagebox.showerror("Usuário ou senha inexistente", "Usuário ou senha inexistente")
+
 def login_funcionario():
     global id_input, senha_input
     window = Tk()
@@ -48,4 +54,3 @@ def login_funcionario():
 
     window.mainloop()
 
-login_funcionario()

@@ -1,9 +1,10 @@
 from tkinter import Tk, Label, Button
 from Components.Frames import frame_top, frame_meio, frame_final
-from View.marca_formatura import marca_graduation
+from View.FORMATURA.marca_formatura import marca_graduation
+from View.Funcionarios.Login import login_funcionario
 
-def marca():
-    print("Foi")
+def funcionarios():
+    login_funcionario()
 
 def open_window_marca_formatura():
     marca_graduation()
@@ -34,7 +35,7 @@ title_frame_top.place(x=30, y=50)
 btn_marca_formatura = Button(frameM,text="Marca Formatura", bg='white', fg='black',width=15, font=("Arial 16 bold"), command=open_window_marca_formatura)
 btn_marca_formatura.place(x=10, y=80)
 
-btn_funcionarios = Button(frameM, text="Funcionarios" , bg="white", fg="black",width=15, font=("Arial 16 bold"))
+btn_funcionarios = Button(frameM, text="Funcionarios" , bg="white", fg="black",width=15, font=("Arial 16 bold"), command=funcionarios)
 btn_funcionarios.place(x=10, y=190)
 
 btn_buffet = Button(frameM, text="Buffet" , bg="white", fg="black",width=15, font=("Arial 16 bold"))

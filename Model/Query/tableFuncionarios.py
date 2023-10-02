@@ -1,12 +1,12 @@
 from Model.database import connect_database
 
-def verificar_login(usuario, senha):
+def verificar_login(matricula, nome):
     conn = connect_database()
     if conn is not None:
         try:
             cursor = conn.cursor()
-            query = "SELECT matricula, usuario FROM logsFuncionarios WHERE usuario = %s AND senha = %s"
-            cursor.execute(query, (usuario, senha))
+            query = "SELECT matricula, nome FROM CONTRATAR_FUNCIONARIO WHERE matricula = %s AND nome = %s"
+            cursor.execute(query, (matricula, nome))
             resultado = cursor.fetchone()
 
             if resultado:
@@ -20,3 +20,21 @@ def verificar_login(usuario, senha):
 
         except Exception as err:
             print(f"Erro ao verificar o login: {str(err)}")
+
+
+
+def listar_funcionarios():
+    conn = connect_database()
+    if conn is not None:
+        try:
+            cursor = conn.cursor()
+            query = "SELECT MATRICULA, NOME, SALARIO, FUNCAO FROM CONTRATAR_FUNCIONARIO"
+            cursor.execute(query)
+            funcionarios = cursor.fetchall()
+            cursor.close()
+            conn.close()
+            print("Consulta com sucesso")
+            return funcionarios
+        except Exception as err:
+            print(f"Erro ao consultar o banco de dados: {str(err)}")
+

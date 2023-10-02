@@ -1,6 +1,5 @@
 from tkinter import Frame
 
-
 def frame_top(janela, width, height, color):
     frameTop = Frame(janela, width=width, height=height, bg=color)
     return  frameTop

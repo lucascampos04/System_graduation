@@ -1,11 +1,24 @@
 from tkinter import Tk, Label, Button, Entry, messagebox, ttk
 from Components.Frames import *
 from contratar_funcionario import windowFuncionarioADD
+from Model.Query.tableFuncionarios import listar_funcionarios
+
+global tabela_funcionarios
+def preencher_tabela():
+    registros = listar_funcionarios()
+
+    for linha in tabela_funcionarios.get_children():
+        tabela_funcionarios.delete(linha)
+
+    for registro in registros:
+        tabela_funcionarios.insert("", "end", values=registro)
+
 
 def window_contratar_funcionario():
     windowFuncionarioADD()
 
 def CrudFuncionarios():
+    global tabela_funcionarios
     window = Tk()
     window.title("Funcionarios");
     window.geometry("500x500")
@@ -43,6 +56,7 @@ def CrudFuncionarios():
     style.configure("Treeview.Heading", borderwidth=1, relief="solid", foreground="black")
 
     tabela_funcionarios.place(x=30, y=50)
+    preencher_tabela()
     window.mainloop()
 
 CrudFuncionarios()
